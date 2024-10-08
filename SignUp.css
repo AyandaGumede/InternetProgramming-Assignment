@@ -63,6 +63,7 @@ form input{
     font-family: "Helvetica Neue", Arial, sans-serif;
     font-size: 14px;
 }
+
 /*----------Disclamer---------- */
 .disclamer{
     font-family: "Helvetica Neue", Arial, sans-serif;
@@ -101,3 +102,4 @@ form input{
 .logIn:hover{
     color:cadetblue
 }
+
