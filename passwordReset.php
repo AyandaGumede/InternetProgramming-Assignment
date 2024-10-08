@@ -41,6 +41,7 @@
             border-radius: 5px;
             padding: 1%;
             margin-bottom: 1.8%;
+            outline: none;
         }
         button{
             width: 30%;
@@ -84,8 +85,52 @@
     <form action="passwordReset.php" method="POST">
         <h2>Trouble with loggin in?</h2>
         <p>Forgot your password?<br> Don't worry just enter your email address below, we'll get back your account.</p>
-        <input type="email" placeholder="Email address" name="emai" required/>
+        <input type="email" placeholder="Email address" name="email" required/>
+        <input type="password" placeholder="Enter new password" name="new-password" required/>
         <button type="submit" name="submitBtn">Submit</button>
     </form>
+
+    <?php
+include("DB_Connection.php");
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST["submitBtn"])) {
+        $user_email = $_POST["email"];
+        $password = $_POST["new-password"];
+
+        // Hash the new password
+        $new_password = password_hash($password, PASSWORD_DEFAULT);
+
+        // Check if the user exists
+        $sql = "SELECT * FROM syncup_users WHERE email = ?";
+        $connect = $connection->prepare($sql);
+        $connect->bind_param("s", $user_email); 
+        $connect->execute();
+        $result = $connect->get_result();
+
+        if ($result->num_rows > 0) {
+            // User exists, update the password
+            $update_sql = "UPDATE syncup_users SET password = ? WHERE email = ?";
+            $update_stmt = $connection->prepare($update_sql);
+            $update_stmt->bind_param("ss", $new_password, $user_email);
+            $update_stmt->execute();
+
+            if ($update_stmt->affected_rows > 0) {
+                echo "<script>alert('Password updated successfully');</script>";
+            } else {
+                echo "<script>alert('Failed to update password');</script>";
+            }
+
+            $update_stmt->close();
+        } else {
+            echo "<script>alert('User not found');</script>";
+        }
+
+        $connect->close();
+    }
+}
+?>
+
+
 </body>
 </html>

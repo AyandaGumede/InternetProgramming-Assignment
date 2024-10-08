@@ -1,0 +1,119 @@
+body{
+    background-color: rgb(238, 238, 237);
+    height: 100%;
+    margin: 0;
+    display: grid;
+    place-items: center;
+}
+form{
+    width: 30%;
+    margin-top: 5%;
+    padding: 22px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+}
+form h2{
+    text-align: center;
+    font-family: sans-serif;
+    padding: 1%;
+}
+form p{
+    text-align: center;
+    padding-bottom: 3%;
+    font-size: 13.5px;
+}
+form input{
+    width: 97%;
+    height: 30px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 1%;
+    margin-bottom: 1.8%;
+    outline: none;
+}
+button{
+    width: 30%;
+    height: 35px;
+    border: none;
+    border-radius: 5px;
+    background-color:cadetblue;
+    color: white;
+    cursor: pointer;
+    margin-bottom: 2%;
+}
+button:hover{
+    background-color: rgb(50, 84, 85);
+    transform: scale(0.95);
+}
+a{
+    font-size: 13.5px;
+    color:rgb(50, 84, 85);
+    text-align: right;
+    text-decoration: none;
+}
+a:hover{
+    color: cadetblue;
+}
+
+
+/*-----------------Cookies-------------*/
+
+.cookies{
+width: 95%;
+margin-left: 0%;
+padding: 1%;
+place-items: left;
+font-family: 'Segoe UI';
+background-color: white;
+font-weight: lighter;
+border: none;
+border-radius: 10px;
+margin-top: -7%;
+transform: translate(0%, 40%) scale(0);
+transition: 1000ms;
+z-index: 10;
+}
+.cookies .user-cookies{
+    border: none;
+    margin-left: 33%;
+    width: 60%;
+    margin-top: -2%;
+    background-color: transparent;
+}
+.cookies-active{
+transform: translate(0%, 0%) scale(1);
+
+}
+.cookies h2{
+font-weight: lighter;
+}
+.cookies ul{
+margin-left: 5%;
+}
+.cookies a{
+text-decoration: none;
+color: cadetblue;
+}
+.cookies a:hover{
+color:rgb(50, 84, 85);
+}
+.cookies-btn{
+margin-left: 70%;
+}
+.cookies-btn button{
+width: 45%;
+height: 50px;
+border: none;
+border-radius: 10px;
+background-color: cadetblue;
+color: white;
+font-size: 13.5px;
+font-weight: lighter;
+cursor: pointer;
+}
+.cookies-btn button:hover{
+background-color: rgb(50, 84, 85);
+transform: scale(0.96);
+}
