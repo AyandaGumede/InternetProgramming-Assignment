@@ -57,63 +57,72 @@ a:hover{
     color: cadetblue;
 }
 
-
 /*-----------------Cookies-------------*/
 
-.cookies{
-width: 95%;
-margin-left: 0%;
-padding: 1%;
-place-items: left;
-font-family: 'Segoe UI';
-background-color: white;
-font-weight: lighter;
-border: none;
-border-radius: 10px;
-margin-top: -7%;
-transform: translate(0%, 40%) scale(0);
-transition: 1000ms;
-z-index: 10;
+.cookies {
+    width: 95%;
+    padding: 1%;
+    font-family: 'Segoe UI';
+    background-color: white;
+    font-weight: lighter;
+    border: none;
+    border-radius: 10px;
+    margin-top: -7%;
+    transform: translateY(-100%);
+    opacity: 0; 
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    z-index: -1; /* Change this to -1 to prevent it from blocking the form */
+    position: relative; /* Ensure it doesn't overlap form */
 }
-.cookies .user-cookies{
+
+.cookies-active {
+    transform: translateY(0);
+    opacity: 1;
+    z-index: 10; /* Increase z-index when the popup is active */
+}
+
+.cookies .user-cookies {
     border: none;
     margin-left: 33%;
     width: 60%;
     margin-top: -2%;
     background-color: transparent;
 }
-.cookies-active{
-transform: translate(0%, 0%) scale(1);
 
+.cookies h2 {
+    font-weight: lighter;
 }
-.cookies h2{
-font-weight: lighter;
+
+.cookies ul {
+    margin-left: 5%;
 }
-.cookies ul{
-margin-left: 5%;
+
+.cookies a {
+    text-decoration: none;
+    color: cadetblue;
 }
-.cookies a{
-text-decoration: none;
-color: cadetblue;
+
+.cookies a:hover {
+    color: rgb(50, 84, 85);
 }
-.cookies a:hover{
-color:rgb(50, 84, 85);
+
+.cookies-btn {
+    margin-left: 70%;
 }
-.cookies-btn{
-margin-left: 70%;
+
+.cookies-btn button {
+    width: 45%;
+    height: 50px;
+    border: none;
+    border-radius: 10px;
+    background-color: cadetblue;
+    color: white;
+    font-size: 13.5px;
+    font-weight: lighter;
+    cursor: pointer;
 }
-.cookies-btn button{
-width: 45%;
-height: 50px;
-border: none;
-border-radius: 10px;
-background-color: cadetblue;
-color: white;
-font-size: 13.5px;
-font-weight: lighter;
-cursor: pointer;
-}
-.cookies-btn button:hover{
-background-color: rgb(50, 84, 85);
-transform: scale(0.96);
+
+.cookies-btn button:hover {
+    background-color: rgb(50, 84, 85);
+    transform: scale(0.96);
 }

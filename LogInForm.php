@@ -45,33 +45,47 @@
 </div>
 
 <?php
-session_start(); // Session start
+session_start(); 
+
 include("DB_Connection.php");
 
 if (isset($_POST["submit"])) {
     $user_email = $_POST["user-email"];
-    $user_pass = $_POST["password"]; 
+    $user_password = strtolower($_POST["password"]); // password is lowercase
 
-    $sql = "SELECT users_id, password FROM syncup_users WHERE email = ?";
-    $connect = $connection->prepare($sql);
-    $connect->bind_param("s", $user_email);
-    $connect->execute();
-    $connect->bind_result($user_id, $hashed_password);
-    $connect->fetch();
+    // query
+    $result = mysqli_query($connection, "SELECT users_id, password FROM syncup_users WHERE email = '$user_email'");
 
-    if (password_verify($user_pass, $hashed_password)) {
-        $_SESSION['user_id'] = $user_id; 
-        header("Location: homePage.php");
-        exit();
+   
+    if ($result && mysqli_num_rows($result) > 0) {  
+        $row = mysqli_fetch_assoc($result);
+        $user_id = $row['users_id'];
+        $database_password = $row['password'];
+
+        // Verify password
+        if ($user_password == $database_password) {
+            $_SESSION['user_id'] = $user_id;
+            $_SESSION['user_email'] = $user_email; 
+            header("Location: homePage.php");
+            exit(); 
+        } else {
+            echo "<script>window.alert('Incorrect password.');</script>";
+        }
     } else {
-        // Validation
-        echo "<script>window.alert('Incorrect email or password');</script>";
+        echo "<script>window.alert('Incorrect email or password.');</script>"; 
     }
 }
+
+if (isset($_POST["enable"])) {
+    if (isset($_SESSION['user_email'])) {
+        setcookie("userEmail", $_SESSION['user_email'], time() + 604800);
+    }
+}
+
+mysqli_close($connection);
 ?>
 
 
-
-    <script src="LogIn.js"></script>
+<script src="LogIn.js"></script>
 </body>
 </html>

@@ -8,49 +8,51 @@
 </head>
 <body>
     <form action="SignUp.php" method="POST">
-                <?php
-                // Start the session
-                session_start();
-            
-                include("DB_Connection.php");
-            
-                if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                    $username = $_POST["name"];
-                    $user_surname = $_POST["surname"];
-                    $user_email = $_POST["email"];
-                    $password = strtolower($_POST["password"]);
-                    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-                    $day = $_POST['dob-day'];
-                    $month = $_POST["dob-month"];
+    <?php
+// Start the session
+session_start();
+
+include("DB_Connection.php");
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST["name"];
+    $user_surname = $_POST["surname"]; 
+    $user_email = $_POST["email"];
+    // UserPassword
+    $password = strtolower($_POST["password"]);
     
-                    $month_numeric = date('m', strtotime($month));
-                    $year = $_POST['dob-year'];
-                    // Corrected date format
-                    $date_of_birth = $year . '-' . $month_numeric . '-' . $day;
-            
-                    // Name session
-                    $_SESSION['username'] = $username;
-                    $_SESSION['user_surname'] = $user_surname;
-            
-                    $db_connecor = $connection->prepare("INSERT INTO syncup_users (first_name, last_name, email, password, date_of_birth) VALUES (?, ?, ?, ?, ?)");
-            
-                    // Bind the actual values to the placeholders
-                    $db_connecor->bind_param("sssss", $username, $user_surname, $user_email, $hashed_password, $date_of_birth);
-            
-                    // Execute the statement
-                    if ($db_connecor->execute()) {
-                        header("Location: homePage.php");
-                        exit();
-                    } else {
-                        // Output the error for debugging
-                        echo "<script>window.alert('Failed to create account: " . $db_connecor->error . "');</script>";
-                    }
-                    
-                    // Close the statement and connection
-                    $db_connecor->close();
-                    mysqli_close($connection);
-                }
-                ?>
+    // Date of birth
+    $day = $_POST['dob-day'];
+    $month = $_POST["dob-month"];
+    $month_numeric = date('m', strtotime($month));
+    $year = $_POST['dob-year'];
+    // Corrected date format
+    $date_of_birth = $year . '-' . $month_numeric . '-' . $day;
+    // setting sessions
+    $_SESSION['username'] = $username;
+    $_SESSION['user_surname'] = $user_surname;
+
+    // Check if the email already exists
+    $checkEmailQuery = mysqli_query($connection, "SELECT email FROM syncup_users WHERE email = '$user_email'");
+    
+    // If email already exists
+    if (mysqli_num_rows($checkEmailQuery) > 0) {
+        echo "<script>window.alert('User already exists');</script>";
+    } else {
+        // If email does not exist
+        $sqlQuery = mysqli_query($connection, "INSERT INTO syncup_users (first_name, last_name, email, password, date_of_birth) VALUES ('$username', '$user_surname', '$user_email', '$password', '$date_of_birth')" );
+        
+        
+        if ($sqlQuery) {
+            header("Location: LogInForm.php");
+            exit();
+        } else {
+            echo "<script>window.alert('Failed to create account..!');</script>";
+        }
+    }
+}
+?>
+
         <h2>Create a new account</h2>
         <p id="slogan">It's quick and easy.</p>
         <hr>

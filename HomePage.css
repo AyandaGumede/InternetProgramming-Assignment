@@ -18,17 +18,22 @@ form{
 h1{
     font-size: 40px;
 }
+input[type="file"]{
+    width: 14.2%;
+    border: none;
+    margin-left: 75%;
+}
 img{
     width: 25%;
     height: 20vh;
-    margin-top: -25%;
+    margin-top: -80%;
     margin-left: 70%;
     border-radius: 50%;
 }
 button a{
     text-decoration: none;
     color: white;
-    font-size: 14px
+    font-size: 13px
 }
 .custom-upload-btn {
     width: 20%;
@@ -37,8 +42,9 @@ button a{
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 14px;
-    margin-top: -55%;
+    font-size: 13px;
+    margin-top: 1%;
+    margin-left: 73%;
 }
 
 .custom-upload-btn:hover {
@@ -81,8 +87,49 @@ form input{
     font-size: 14px;
 }
 .user-posts{
-    width: 80%;
-    padding: 1%;
-    border: 1px solid grey;
+    width: 88%;
+    height: 85px;
+    padding: 2%;
+    margin-bottom: 1.5%;
+    background: rgb(238, 238, 237);
+    border: none;
     border-radius: 5px;
+    box-shadow: 0 0px 4.5px 0px rgb(44, 44, 54);
+    cursor: pointer;
+}
+.user-posts:hover{
+    box-shadow: 0 0px 6px 0px rgb(0, 0, 0);
+}
+.user-posts p{
+    font-size: 19px;
+    font-family: 'Segoe UI';
+    font-weight: lighter;
+}
+.user-posts .date{
+    font-size: 16px;
+}
+.error{
+    color: red;
+    font-weight: bold;
+    font-style: italic;
+}
+/* - - - - Search Results - - - -  */
+.result-area{
+    width: 88%;
+    height: px;
+    padding: 1.5%;
+    background: rgb(238, 238, 237);
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0px 4.5px 0px rgb(44, 44, 54);
+}
+.result-area p{
+    font-size: 18px;
+    font-weight: lighter;
+}
+.result-area p:nth-child(1){
+    margin-bottom: -3%;
+}
+.result-area button{
+    margin-top: -2%;
 }

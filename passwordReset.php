@@ -96,7 +96,7 @@ include("DB_Connection.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["submitBtn"])) {
         $user_email = $_POST["email"];
-        $password = $_POST["new-password"];
+        $password = strtolower($_POST["new-password"]);
 
         // Hash the new password
         $new_password = password_hash($password, PASSWORD_DEFAULT);
